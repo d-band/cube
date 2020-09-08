@@ -1,0 +1,40 @@
+{
+  "name": "cube",
+  "version": "1.0.0",
+  "description": "rubik's cube solver",
+  "main": "index.js",
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "koa": "^2.13.0",
+    "kociemba": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "build:make": "cd kociemba && make",
+    "start": "node server.js",
+    "dev": "dool server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d-band/cube.git"
+  },
+  "keywords": [
+    "rubik's",
+    "cube",
+    "solver"
+  ],
+  "author": "d-band",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/d-band/cube/issues"
+  },
+  "homepage": "https://github.com/d-band/cube#readme"
+}

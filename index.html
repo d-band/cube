@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cube</title>
+  <link rel="stylesheet" href="http://localhost:8000/index.css">
+</head>
+<body>
+  <div class="main">
+    <div class="cubes"></div>
+    <div class="colors">
+      <div class="btn-cube color-U" data-k="U"></div>
+      <div class="btn-cube color-R" data-k="R"></div>
+      <div class="btn-cube color-F" data-k="F"></div>
+      <div class="btn-cube color-D" data-k="D"></div>
+      <div class="btn-cube color-L" data-k="L"></div>
+      <div class="btn-cube color-B" data-k="B"></div>
+    </div>
+    <div class="cube-state">
+      <input type="text" class="output">
+      <button id="solve" type="button">Solve</button>
+    </div>
+    <div class="cube-solved">
+      <button id="prev" type="button">Prev</button>
+      <div class="solved-output"></div>
+      <button id="next" type="button">Next</button>
+    </div>
+    <div class="rubiks-cube">
+      <canvas id="glcanvas" width="640" height="500">
+        Your browser does not support the HTML5 canvas tag.
+      </canvas>
+      <div class="status" id="statusbar">
+        <svg id="progressBarContainer" width="600" height="20">
+          <rect id="progressBar" width="0" height="20"/>
+        </svg>
+        <p id="statusBox"></p>
+      </div>
+      <div class="control">
+        <select id="shuffleLength">
+          <option value="50">50 Rotations</option>
+          <option value="200">200 Rotations</option>
+          <option value="1000">1000 Rotations</option>
+        </select>
+        <button id="shuffle" type="button">Shuffle</button>
+      </div>
+      <div class="control">
+        <button id="slowdown" type="button">Slow Down</button>
+        <button id="speedup" type="button">Speed Up</button>
+        <button id="pause" type="button">Pause</button>
+        <button id="reset" type="button">Reset</button>
+      </div>
+    </div>
+  </div>
+  <!-- Fragment shader program -->
+  <script id="shader-fs" type="x-shader/x-fragment">
+    varying highp vec2 vTextureCoord;
+    varying highp vec3 vLighting;
+    uniform sampler2D uSampler;
+    void main(void) {
+      highp vec4 texelColor = texture2D(uSampler,
+      vec2(vTextureCoord.s, vTextureCoord.t));
+      gl_FragColor = vec4(texelColor.rgb * vLighting, texelColor.a);
+    }
+  </script>
+  <!-- Vertex shader program -->
+  <script id="shader-vs" type="x-shader/x-vertex">
+    attribute highp vec3 aVertexNormal;
+    attribute highp vec3 aVertexPosition;
+    attribute highp vec2 aTextureCoord;
+
+    uniform highp mat4 uNormalMatrix;
+    uniform highp mat4 uMVMatrix;
+    uniform highp mat4 uPMatrix;
+
+    varying highp vec2 vTextureCoord;
+    varying highp vec3 vLighting;
+
+    void main(void) {
+      gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+      vTextureCoord = aTextureCoord;
+      // Apply lighting effect
+      highp vec3 ambientLight = vec3(0.6, 0.6, 0.6);
+      highp vec3 directionalLightColor = vec3(0.5, 0.5, 0.75);
+      highp vec3 directionalVector = vec3(0.85, 0.8, 0.75);
+      highp vec4 transformedNormal = uNormalMatrix * vec4(aVertexNormal, 1.0);
+      highp float directional = max(dot(transformedNormal.xyz, directionalVector), 0.0);
+      vLighting = ambientLight + (directionalLightColor * directional);
+    }
+  </script>
+  <script type="text/javascript" src="http://localhost:8000/index.js"></script>
+</body>
+</html>

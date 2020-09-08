@@ -1,0 +1,20 @@
+<table class="cubes-table">
+  <tr>
+    <td></td>
+    <td><%-U%></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><%-L%></td>
+    <td><%-F%></td>
+    <td><%-R%></td>
+    <td><%-B%></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><%-D%></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
