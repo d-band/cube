@@ -138,6 +138,7 @@ export default function Cubr () {
     cube.setVersion(3);
     bindEventListeners();
     reset();
+    updateSpeed();
   };
 
   function shuffle () {
@@ -170,45 +171,26 @@ export default function Cubr () {
     cube.makeMoves(list);
   }
 
-  function updateStatus (s) {
-    const box = document.getElementById('statusBox');
-    box.innerHTML = s;
-  }
-
-  function updateProgressBar (percent) {
+  function updateProgress (percent) {
     const bar = document.getElementById('progressBar');
-    const cont = document.getElementById('progressBarContainer');
-    const maxWidth = cont.width.baseVal.value;
-    bar.setAttribute('width', (~~(percent * maxWidth)).toString());
+    bar.style.width = `${~~(percent * 100)}%`;
   }
 
-  function updatePauseButton () {
-    const text = settings.paused ? 'Unpause' : 'Pause';
-    document.getElementById('pause').textContent = text;
+  function updateSpeed () {
+    document.getElementById('speedInput').value = 30 - settings.speed;
   }
 
   this.run = run;
   this.reset = reset;
   this.shuffle = shuffle;
   this.makeMoves = makeMoves;
-  this.updateStatus = updateStatus;
-  this.updateProgressBar = updateProgressBar;
-  this.pause = () => {
-    settings.paused = true;
-    updatePauseButton();
-  };
-  this.unpause = () => {
-    settings.paused = false;
-    updatePauseButton();
-  };
-  this.togglePause = () => {
-    settings.paused = !(settings.paused);
-    updatePauseButton();
-  };
+  this.updateProgress = updateProgress;
   this.slowdown = () => {
     settings.speed = min(settings.speed + 2, 30);
+    updateSpeed();
   };
   this.speedup = () => {
-    settings.speed = max(settings.speed - 2, 1);
+    settings.speed = max(settings.speed - 2, 0);
+    updateSpeed();
   };
 }

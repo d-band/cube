@@ -42,6 +42,8 @@ function reverse (list) {
 }
 
 const main = {
+  index: 0,
+  resolved: [],
   cur: 'X',
   init () {
     this.data = {
@@ -79,28 +81,6 @@ const main = {
     $('.output').on('change', (e) => {
       this.setData(e.target.value);
       this.render();
-    });
-    $(document).keydown(e => {
-      const code = e.keyCode || e.which;
-      const arr = ['U', 'R', 'F', 'D', 'L', 'B'];
-      const index = arr.indexOf(this.cur);
-      const last = arr.length - 1;
-      if (code === 37 || code === 38) {
-        if (index > 0) {
-          this.cur = arr[index - 1];
-        } else {
-          this.cur = arr[last];
-        }
-      }
-      if (code === 39 || code === 40) {
-        if (index >= last) {
-          this.cur = arr[0];
-        } else {
-          this.cur = arr[index + 1];
-        }
-      }
-      $('.btn-cube.active').removeClass('active');
-      $(`.btn-cube[data-k="${this.cur}"]`).addClass('active');
     });
     $('#shuffle').on('click', () => {
       this.cubr.shuffle();
@@ -159,9 +139,6 @@ const main = {
     });
     $('#speedup').on('click', () => {
       this.cubr.speedup();
-    });
-    $('#pause').on('click', () => {
-      this.cubr.togglePause();
     });
     $('#reset').on('click', () => {
       this.cubr.reset();

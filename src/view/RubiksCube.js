@@ -104,7 +104,7 @@ export default function RubiksCube (sce, set, cubr) {
         info.moves.push(randomMove());
         info.moves.push({
           action () {
-            cubr.updateProgressBar((1.0 * i) / numMoves);
+            cubr.updateProgress((1.0 * i) / numMoves);
           }
         });
       }
@@ -117,7 +117,7 @@ export default function RubiksCube (sce, set, cubr) {
     }
     randomMoves.push({
       action () {
-        cubr.updateProgressBar(0);
+        cubr.updateProgress(0);
       }
     });
     randomMoves.push({

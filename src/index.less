@@ -1,73 +1,105 @@
+@import 'style/layout';
+@import 'style/input';
+
 html, body {
   margin: 0;
   padding: 0;
 }
 html, body {
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: #000;
 }
 * {
   box-sizing: border-box;
 }
-.main {
-  width: 880px;
-  margin: 20px auto;
+.cubes {
+  border-bottom: 1px solid #bcc3ce;
 }
 .cubes-table {
-  background-color: #e9ecef;
-  padding: 15px;
-  border-radius: 4px;
+  margin: 15px auto;
+  border-spacing: 6px;
+}
+.cube-table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 .cube {
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
   border-radius: 4px;
   border: 2px solid #000;
   cursor: pointer;
+  background-color: #999;
 }
 .colors {
+  position: absolute;
+  width: 162px;
+  right: 28px;
+  top: 0;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   margin-top: 20px;
 }
 .cube-state {
-  text-align: center;
-}
-.output {
-  margin-top: 20px;
-  min-width: 540px;
+  margin-top: 15px;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+
+  .output {
+    flex: 1;
+    margin-right: 10px;
+  }
+  .btn {
+    width: 66px;
+  }
 }
 .cube-solved {
-  margin: 20px 0;
-  text-align: center;
-}
-.solved-output {
-  display: inline-block;
-  width: 500px;
-  span {
-    margin: 0 10px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #bcc3ce;
+
+  .solved-output {
+    height: 66px;
+    flex: 1;
+    margin-right: 10px;
+
+    span {
+      margin: 0 10px;
+    }
+    span.active {
+      color: red;
+      font-weight: bold;
+    }
   }
-  span.active {
-    color: red;
-    font-weight: bold;
+  .btns {
+    width: 66px;
+    .btn {
+      width: 100%;
+      &:first-child {
+        margin-bottom: 10px;
+      }
+    }
   }
 }
 .btn-cube {
-  margin: 0 10px;
-  width: 64px;
-  height: 64px;
+  margin: 5px;
+  width: 44px;
+  height: 44px;
   border-radius: 4px;
   border: 2px solid #aaa;
   cursor: pointer;
   &.active {
     border-color: #000;
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
   }
 }
 .color-U {
@@ -94,8 +126,49 @@ html, body {
   // 橙
   background-color: #ff5900;
 }
+.controls {
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .input-group {
+    flex: 1;
+  }
+  .reset-btn {
+    width: 66px;
+  }
+}
+.speed-wrap {
+  margin-right: 10px;
+  .btn {
+    width: 32px;
+  }
+}
+.shuffle-wrap {
+  margin-right: 10px;
+  position: relative;
 
+  .btn {
+    width: 66px;
+  }
+  .progress-bar {
+    z-index: 100;
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 240px;
+    border-radius: 1px;
+
+    .progress {
+      height: 2px;
+      background: #009b48;
+    }
+  }
+}
 .rubiks-cube {
-  text-align: center;
-  margin-top: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
