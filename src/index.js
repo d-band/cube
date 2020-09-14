@@ -2,6 +2,7 @@ import $ from 'jquery';
 import Cubr from './view/Cubr';
 import cubeTpl from './cube.atpl';
 import cubesTpl from './cubes.atpl';
+import Capture from './capture';
 import './index.less';
 
 window.ENCODE = (str) => {
@@ -193,4 +194,17 @@ const main = {
 
 $(() => {
   main.init();
+  const capture = new Capture($);
+  $('#capture').on('click', () => {
+    capture.show();
+  });
+  $('#captureModal .close').on('click', () => {
+    capture.hide();
+  });
+  $('#detectColors').on('click', () => {
+    const str = capture.getColors();
+    main.setData(str);
+    main.render();
+    capture.hide();
+  });
 });

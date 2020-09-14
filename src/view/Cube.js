@@ -8,6 +8,8 @@ function transformPortion (portion, expFactor) {
   }
 }
 
+let image = null;
+
 /* Cube is centered at (x, y, z)
  * Each edge has length `len`
  * "Up" indicates the normal to the face with color colors[0]
@@ -384,31 +386,33 @@ export default function Cube (
 
   function createTexture () {
     const gl = scene.gl;
-    const canvas = document.createElement('canvas');
-    canvas.id = 'hiddenCanvas';
-    canvas.width = 128;
-    canvas.height = 128 * 8;
-    canvas.style.display = 'none';
-    const body = document.getElementsByTagName('body')[0];
-    body.appendChild(canvas);
-    // draw texture
-    const image = document.getElementById('hiddenCanvas');
-    const ctx = image.getContext('2d');
-    ctx.beginPath();
-    ctx.rect(0, 0, ctx.canvas.width / 2, ctx.canvas.height / 2);
-    ctx.fillStyle = 'white';
-    ctx.fill();
-
-    const W = 128;
-    const H = 128;
-
-    for (let f = 0; f < settings.colors.length; f++) {
+    if (!image) {
+      const canvas = document.createElement('canvas');
+      canvas.id = 'hiddenCanvas';
+      canvas.width = 128;
+      canvas.height = 128 * 8;
+      canvas.style.display = 'none';
+      const body = document.getElementsByTagName('body')[0];
+      body.appendChild(canvas);
+      // draw texture
+      image = document.getElementById('hiddenCanvas');
+      const ctx = image.getContext('2d');
       ctx.beginPath();
-      ctx.rect(0, H * f, W, H);
-      ctx.fillStyle = settings.colors[f];
+      ctx.rect(0, 0, ctx.canvas.width / 2, ctx.canvas.height / 2);
+      ctx.fillStyle = 'white';
       ctx.fill();
+
+      const W = 128;
+      const H = 128;
+
+      for (let f = 0; f < settings.colors.length; f++) {
+        ctx.beginPath();
+        ctx.rect(0, H * f, W, H);
+        ctx.fillStyle = settings.colors[f];
+        ctx.fill();
+      }
+      ctx.restore();
     }
-    ctx.restore();
     // create new texture
     const tex = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, tex);

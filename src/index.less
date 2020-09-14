@@ -1,22 +1,13 @@
+@import 'style/reset';
 @import 'style/layout';
 @import 'style/input';
+@import 'style/modal';
 
 html, body {
-  margin: 0;
-  padding: 0;
-}
-html, body {
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
   color: #212529;
-  text-align: left;
   background-color: #000;
 }
-* {
-  box-sizing: border-box;
-}
+
 .cubes {
   border-bottom: 1px solid #bcc3ce;
 }
@@ -136,6 +127,7 @@ html, body {
   }
   .reset-btn {
     width: 66px;
+    margin-left: 10px;
   }
 }
 .speed-wrap {
@@ -171,4 +163,45 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.camera {
+  position: relative;
+  .rect-cells {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    left: 180px;
+    top: 100px;
+    border: 2px solid #cbef5d;
+    background: transparent;
+    .rect-h {
+      position: absolute;
+      top: 80px;
+      left: -2px;
+      width: 240px;
+      height: 80px;
+      border-top: 2px solid #cbef5d;
+      border-bottom: 2px solid #cbef5d;
+    }
+    .rect-v {
+      position: absolute;
+      top: -2px;
+      left: 80px;
+      width: 80px;
+      height: 240px;
+      border-left: 2px solid #cbef5d;
+      border-right: 2px solid #cbef5d;
+    }
+  }
+}
+.capture-video {
+  width: 600px;
+  min-height: 450px;
+}
+.capture-canvas {
+  display: none;
+}
+.current-face {
+  position: absolute;
+  left: 15px;
 }

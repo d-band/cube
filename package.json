@@ -6,7 +6,8 @@
   "dependencies": {
     "jquery": "^3.5.1",
     "koa": "^2.13.0",
-    "kociemba": "^1.0.1"
+    "kociemba": "^1.0.1",
+    "skmeans": "^0.11.3"
   },
   "devDependencies": {
     "eslint": "^7.8.1",

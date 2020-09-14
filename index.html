@@ -10,7 +10,7 @@
   <div class="container">
     <div class="content">
       <div class="rubiks-cube">
-        <canvas id="glcanvas" width="640" height="500">
+        <canvas id="glcanvas" width="640" height="480">
           Your browser does not support the HTML5 canvas tag.
         </canvas>
       </div>
@@ -53,7 +53,34 @@
           </select>
           <button id="shuffle" type="button" class="btn input-group-btn">Shuffle</button>
         </div>
+        <button id="capture" type="button" class="btn">Capture</button>
         <button id="reset" type="button" class="btn reset-btn">Reset</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="captureModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Face Color Detection</h5>
+          <button type="button" class="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="camera">
+            <video id="captureVideo" class="capture-video">Video stream not available.</video>
+            <div class="rect-cells">
+              <div class="rect-h"></div>
+              <div class="rect-v"></div>
+            </div>
+          </div>
+          <canvas id="captureCanvas" class="capture-canvas"></canvas>
+        </div>
+        <div class="modal-footer">
+          <span class="current-face">Current face: <span id="currentFace"></span></span>
+          <button id="detectColors" type="button" class="btn btn-primary">Detect Colors</button>
+        </div>
       </div>
     </div>
   </div>
