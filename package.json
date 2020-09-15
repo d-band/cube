@@ -4,24 +4,23 @@
   "description": "rubik's cube solver",
   "main": "index.js",
   "dependencies": {
-    "jquery": "^3.5.1",
-    "koa": "^2.13.0",
-    "kociemba": "^1.0.1",
-    "skmeans": "^0.11.3"
+    "kociemba": "^1.0.1"
   },
   "devDependencies": {
+    "dool": "^4.3.7",
     "eslint": "^7.8.1",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "jquery": "^3.5.1",
+    "skmeans": "^0.11.3"
   },
   "scripts": {
-    "lint": "eslint src",
-    "build:make": "cd kociemba && make",
-    "start": "node server.js",
-    "dev": "dool server"
+    "lint": "eslint src api",
+    "build": "rm -rf public && dool build && cp index.html public",
+    "start": "dool server"
   },
   "repository": {
     "type": "git",

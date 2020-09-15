@@ -1,9 +1,9 @@
-<table class="cube-table">
+<table class="surface-table">
   <%for(var i=0; i < mat.length; i++) {%>
   <tr>
     <%for(var j=0; j < mat[i].length; j++) {var c=mat[i][j];%>
     <td>
-      <div class="cube color-<%=c%>" data-k="<%=k%>" data-i="<%=i%>" data-j="<%=j%>"></div>
+      <div class="square color-<%=c%>" data-k="<%=k%>" data-i="<%=i%>" data-j="<%=j%>"></div>
     </td>
     <%}%>
   </tr>

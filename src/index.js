@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import Cubr from './view/Cubr';
-import cubeTpl from './cube.atpl';
-import cubesTpl from './cubes.atpl';
+import surfaceTpl from './surface.atpl';
+import surfacesTpl from './surfaces.atpl';
 import Capture from './capture';
 import './index.less';
 
@@ -61,23 +61,23 @@ const main = {
     this.cubr.run();
   },
   bind () {
-    $('.btn-cube').on('click', (e) => {
+    $('.btn-square').on('click', (e) => {
       const el = $(e.currentTarget);
       if (el.hasClass('active')) {
         this.cur = 'X';
         el.removeClass('active');
       } else {
-        $('.btn-cube.active').removeClass('active');
+        $('.btn-square.active').removeClass('active');
         el.addClass('active');
         this.cur = el.data('k');
       }
     });
-    $('.cubes').on('click', '.cube', (e) => {
+    $('.surfaces').on('click', '.square', (e) => {
       const el = $(e.currentTarget);
       const k = el.data('k');
       const i = el.data('i');
       const j = el.data('j');
-      this.setFace(k, i, j);
+      this.setCell(k, i, j);
     });
     $('.output').on('change', (e) => {
       this.setData(e.target.value);
@@ -87,7 +87,7 @@ const main = {
       this.cubr.shuffle();
     });
     $('#solve').on('click', () => {
-      $.get('/solve', {
+      $.get('/api/solve', {
         cube: this.toString()
       }).done(({ data }) => {
         this.moving = false;
@@ -145,7 +145,7 @@ const main = {
       this.cubr.reset();
     });
   },
-  setFace (name, i, j) {
+  setCell (name, i, j) {
     i = Number(i);
     j = Number(j);
     if (i === 1 && j === 1) return;
@@ -156,9 +156,9 @@ const main = {
     const map = {};
     Object.keys(this.data).forEach(k => {
       const mat = this.data[k];
-      map[k] = cubeTpl({ mat, k });
+      map[k] = surfaceTpl({ mat, k });
     });
-    $('.cubes').html(cubesTpl(map));
+    $('.surfaces').html(surfacesTpl(map));
     $('.output').val(this.toString());
   },
   renderSolve () {

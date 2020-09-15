@@ -1,6 +1,6 @@
 import kmeans from 'skmeans';
 
-function maxColor (data) {
+function mainColor (data) {
   const arr = [];
   for (let k = 0; k < data.length; k += 4) {
     arr.push([data[k + 0], data[k + 1], data[k + 2]]);
@@ -98,7 +98,7 @@ export default function Capture ($) {
           const x = 180 + j * 80;
           const y = 100 + i * 80;
           const img = ctx.getImageData(x, y, 80, 80);
-          const c = maxColor(img.data);
+          const c = mainColor(img.data);
           arr.push(c);
           if (i === 1 && j === 1) {
             center = c;

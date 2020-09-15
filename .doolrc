@@ -1,4 +1,5 @@
 {
+  "outputPath": "./public",
   "entry": {
     "index": "./src/index.js"
   }

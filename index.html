@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cube</title>
-  <link rel="stylesheet" href="http://localhost:8000/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
 <body>
   <div class="container">
@@ -17,14 +17,14 @@
     </div>
     <div class="sidebar">
       <div class="colors">
-        <div class="btn-cube color-U" data-k="U"></div>
-        <div class="btn-cube color-R" data-k="R"></div>
-        <div class="btn-cube color-F" data-k="F"></div>
-        <div class="btn-cube color-D" data-k="D"></div>
-        <div class="btn-cube color-L" data-k="L"></div>
-        <div class="btn-cube color-B" data-k="B"></div>
+        <div class="btn-square color-U" data-k="U"></div>
+        <div class="btn-square color-R" data-k="R"></div>
+        <div class="btn-square color-F" data-k="F"></div>
+        <div class="btn-square color-D" data-k="D"></div>
+        <div class="btn-square color-L" data-k="L"></div>
+        <div class="btn-square color-B" data-k="B"></div>
       </div>
-      <div class="cubes"></div>
+      <div class="surfaces"></div>
       <div class="cube-state">
         <input type="text" class="form-input output">
         <button id="solve" type="button" class="btn btn-primary">Solve</button>
@@ -120,6 +120,6 @@
       vLighting = ambientLight + (directionalLightColor * directional);
     }
   </script>
-  <script type="text/javascript" src="http://localhost:8000/index.js"></script>
+  <script type="text/javascript" src="/index.js"></script>
 </body>
 </html>
