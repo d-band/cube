@@ -12,7 +12,7 @@ html, body {
   border-bottom: 1px solid #bcc3ce;
 }
 .surfaces-table {
-  margin: 15px auto;
+  margin: 15px;
   border-spacing: 6px;
 }
 .surface-table {
@@ -27,16 +27,30 @@ html, body {
   cursor: pointer;
   background-color: #999;
 }
+.state-btn {
+  display: block;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  border-color: #fff;
+  background: conic-gradient(
+    #ff5900 0deg 90deg,
+    #009b48 90deg 180deg,
+    #ffd500 180deg 270deg,
+    #0045ad 270deg 0deg
+  );
+}
 .colors {
   position: absolute;
   width: 162px;
   right: 28px;
-  top: 0;
+  top: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 20px;
 }
 .cube-state {
   margin-top: 15px;

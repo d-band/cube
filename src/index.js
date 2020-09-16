@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import Cubr from './view/Cubr';
+import Cubr, { FACES } from './view/Cubr';
 import surfaceTpl from './surface.atpl';
 import surfacesTpl from './surfaces.atpl';
 import Capture from './capture';
@@ -30,9 +30,9 @@ const makeFace = (name) => {
   return mat;
 };
 
-function reverse (list) {
+function oppositeMoves (list) {
   const map = {};
-  ['F', 'B', 'L', 'R', 'U', 'D'].forEach(ch => {
+  FACES.forEach(ch => {
     const chr = `${ch}'`;
     map[ch] = chr;
     map[chr] = ch;
@@ -47,14 +47,10 @@ const main = {
   resolved: [],
   cur: 'X',
   init () {
-    this.data = {
-      U: makeFace('U'),
-      D: makeFace('D'),
-      L: makeFace('L'),
-      R: makeFace('R'),
-      F: makeFace('F'),
-      B: makeFace('B')
-    };
+    this.data = {};
+    FACES.forEach(k => {
+      this.data[k] = makeFace(k);
+    });
     this.bind();
     this.render();
     this.cubr = new Cubr();
@@ -93,9 +89,9 @@ const main = {
         this.moving = false;
         this.index = 0;
         this.resolved = data.split(' ');
-        const reversed = reverse(data.split(' '));
+        const moves = oppositeMoves(data.split(' '));
         this.cubr.reset();
-        this.cubr.makeMoves(reversed, 0);
+        this.cubr.makeMoves(moves, 0);
         this.renderSolve();
       }).fail(() => {
         alert('Unsolvable cube!');
@@ -111,7 +107,7 @@ const main = {
         this.moving = false;
       };
       if (v) {
-        const moves = reverse([v]);
+        const moves = oppositeMoves([v]);
         moves.push({ action: done });
         this.cubr.makeMoves(moves);
       } else {
@@ -143,6 +139,36 @@ const main = {
     });
     $('#reset').on('click', () => {
       this.cubr.reset();
+    });
+    $('#getState').on('click', () => {
+      const faces = this.cubr.getFaces();
+      const pos2xy = (p) => {
+        const [x, y, z] = p;
+        if (z === 3) {
+          return { k: 'F', i: 1 - (y / 2), j: 1 + (x / 2) };
+        }
+        if (z === -3) {
+          return { k: 'B', i: 1 - (y / 2), j: 1 - (x / 2) };
+        }
+        if (y === 3) {
+          return { k: 'U', i: 1 + (z / 2), j: 1 + (x / 2) };
+        }
+        if (y === -3) {
+          return { k: 'D', i: 1 - (z / 2), j: 1 + (x / 2) };
+        }
+        if (x === 3) {
+          return { k: 'R', i: 1 - (y / 2), j: 1 - (z / 2) };
+        }
+        if (x === -3) {
+          return { k: 'L', i: 1 - (y / 2), j: 1 + (z / 2) };
+        }
+      };
+      for (let i = 0; i < faces.length; i++) {
+        const f = faces[i];
+        const p = pos2xy(f.pos);
+        this.data[p.k][p.i][p.j] = FACES[f.color];
+      }
+      this.render();
     });
   },
   setCell (name, i, j) {

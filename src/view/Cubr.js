@@ -8,13 +8,14 @@ function getShuffleLength () {
 }
 
 const COLOR = {
-  green: '#009b48',
-  blue: '#0045ad',
-  white: '#fff',
-  yellow: '#ffd500',
-  red: '#b90000',
-  orange: '#ff5900'
+  F: '#009b48', // green
+  B: '#0045ad', // blue
+  U: '#ffffff', // white
+  D: '#ffd500', // yellow
+  R: '#b90000', // red
+  L: '#ff5900' // orange
 };
+export const FACES = ['F', 'B', 'U', 'D', 'R', 'L'];
 
 export default function Cubr () {
   let scene;
@@ -38,7 +39,7 @@ export default function Cubr () {
     dragSensitivity: 0.003,
     inertia: 0.75,
     colors: [
-      COLOR.green, COLOR.blue, COLOR.white, COLOR.yellow, COLOR.red, COLOR.orange,
+      ...FACES.map(k => COLOR[k]),
       'pink', '#303030'
     ],
     startMomentum: {
@@ -180,11 +181,16 @@ export default function Cubr () {
     document.getElementById('speedInput').value = 30 - settings.speed;
   }
 
+  function getFaces () {
+    return cube.getFaces();
+  }
+
   this.run = run;
   this.reset = reset;
   this.shuffle = shuffle;
   this.makeMoves = makeMoves;
   this.updateProgress = updateProgress;
+  this.getFaces = getFaces;
   this.slowdown = () => {
     settings.speed = min(settings.speed + 2, 30);
     updateSpeed();

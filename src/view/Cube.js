@@ -8,12 +8,10 @@ function transformPortion (portion, expFactor) {
   }
 }
 
-let image = null;
-
 /* Cube is centered at (x, y, z)
  * Each edge has length `len`
- * "Up" indicates the normal to the face with color colors[0]
- * "Right" indicates the normal to the face with color colors[2]
+ * "Up" indicates the normal to the face with color colors[2]
+ * "Right" indicates the normal to the face with color colors[4]
  * Colors are in this order: F B U D R L
  */
 export default function Cube (
@@ -384,6 +382,8 @@ export default function Cube (
     scene.mvPopMatrix();
   }
 
+  let image = null;
+
   function createTexture () {
     const gl = scene.gl;
     if (!image) {
@@ -453,6 +453,24 @@ export default function Cube (
     }
   }
 
+  function getFaces () {
+    const U = ploc.orientation.up;
+    const R = ploc.orientation.right;
+    const F = vec.cross(R, U);
+    const B = vec.muls(-1, F);
+    const D = vec.muls(-1, U);
+    const L = vec.muls(-1, R);
+    const pos = [F, B, U, D, R, L].map(v => vec.add(ploc.pos, v));
+    const faces = [];
+    for (let i = 0; i < colors.length; i++) {
+      const color = colors[i];
+      if (color !== -1) {
+        faces.push({ color, pos: pos[i] });
+      }
+    }
+    return faces;
+  }
+
   function init (sce, set, cols) {
     scene = sce;
     settings = set;
@@ -471,4 +489,5 @@ export default function Cube (
   this.returnHome = returnHome;
   this.getState = getState;
   this.str = tostring;
+  this.getFaces = getFaces;
 }

@@ -132,6 +132,15 @@ export default function Cubelets (set) {
     return state;
   }
 
+  function getFaces () {
+    const faces = [];
+    for (let i = 0; i < cubes.length; i++) {
+      const arr = cubes[i].getFaces();
+      faces.push(...arr);
+    }
+    return faces;
+  }
+
   function updateRotation () {
     for (let i = 0; i < cubes.length; i++) {
       const cube = cubes[i];
@@ -155,4 +164,5 @@ export default function Cubelets (set) {
   this.add = add;
   this.setState = setState;
   this.getState = getState;
+  this.getFaces = getFaces;
 }

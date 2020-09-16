@@ -360,7 +360,11 @@ export default function RubiksCube (sce, set, cubr) {
 
   function getState () {
     return cubelets.getState(moves);
-  };
+  }
+
+  function getFaces () {
+    return cubelets.getFaces();
+  }
 
   function init (sce, set) {
     scene = sce;
@@ -374,6 +378,7 @@ export default function RubiksCube (sce, set, cubr) {
   this.setVersion = setVersion;
   this.setState = setState;
   this.getState = getState;
+  this.getFaces = getFaces;
   this.update = update;
   this.checkForMoves = checkForMoves;
   this.rotate = rotate;
